@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function AddNewReceptSc() {
+export default function AddReceptSc() {
   return <div></div>;
 }
