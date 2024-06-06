@@ -1,11 +1,17 @@
 import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
 
 export default function RecipeDetails({ itemObj, nav }) {
   return (
     <View style={styles.container}>
-      <Text>{itemObj.title}</Text>
-      <Button title=">" onPress={() => nav.navigate("DETAILS_SC", itemObj)} />
+      <View>
+        <TouchableOpacity onPress={() => nav.navigate("DETAILS_SC", itemObj)}>
+          <Text>{itemObj.title}</Text>
+        </TouchableOpacity>
+      </View>
+      <View>
+        <Button title=">" onPress={() => nav.navigate("DETAILS_SC", itemObj)} />
+      </View>
     </View>
   );
 }
