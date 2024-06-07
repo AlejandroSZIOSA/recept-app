@@ -1,12 +1,13 @@
-import React from "react";
 import { View, Text, StyleSheet, ScrollView, FlatList } from "react-native";
-import { useState } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import RecipeDetails from "../components/cardviews/RecipeDetails";
 
 //SEARCH BAR IMPORTS
 import { PaperProvider, Searchbar } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+import axios from "axios";
 
 const TEST_LIST = [
   {
@@ -25,8 +26,43 @@ const TEST_LIST = [
 
 export default function HomeSc({ navigation }) {
   const [searchQuery, setSearchQuery] = useState(""); //SEARCH_QUERY
-  const [todos, setTodos] = useState(TEST_LIST);
+  const [todos, setTodos] = useState();
   const [filteredTodos, setFilteredTodos] = useState(todos); //SET_FILTERS
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetchData1();
+    //fetchData2();
+  }, []);
+
+  const fetchData1 = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get("http://localhost:4000");
+      data = response.data;
+      console.log(data);
+      setTodos(data); //working
+    } catch (error) {
+      console.info(error);
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /* const fetchData2 = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("http://localhost:4000");
+      const data = await response.json();
+      setTodos(data);
+    } catch (error) {
+      console.error("Failed to fetch data", error);
+    } finally {
+      setLoading(false);
+    }
+  }; */
 
   //When text changes
   const onChangeSearch = (query) => {
@@ -42,6 +78,12 @@ export default function HomeSc({ navigation }) {
     setFilteredTodos(filtered);
   };
 
+  if (loading)
+    return (
+      <View>
+        <Text>Loading Todos................</Text>
+      </View>
+    );
   return (
     <View style={styles.container}>
       <Text style={{ fontSize: 40 }}>Recept App</Text>
@@ -59,7 +101,7 @@ export default function HomeSc({ navigation }) {
               renderItem={({ item }) => (
                 <RecipeDetails itemObj={item} nav={navigation} />
               )}
-              keyExtractor={(item) => item.id.toString()}
+
               /* style={styles.listContainer} */
             />
           </ScrollView>
