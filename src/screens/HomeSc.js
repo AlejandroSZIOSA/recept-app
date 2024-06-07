@@ -24,7 +24,7 @@ const TEST_LIST = [
   },
 ];
 
-export default function HomeSc({ navigation }) {
+export default function HomeSc({ navigation, route }) {
   const [searchQuery, setSearchQuery] = useState(""); //SEARCH_QUERY
   const [todos, setTodos] = useState();
   const [filteredTodos, setFilteredTodos] = useState(todos); //SET_FILTERS
@@ -34,7 +34,13 @@ export default function HomeSc({ navigation }) {
   useEffect(() => {
     fetchData1();
     //fetchData2();
-  }, []);
+    if (route.params?.todoId) {
+      // Post updated, do something with `route.params.post`
+      // For example, send the post to the server
+      console.log(route.params.todoId);
+      handleDelete(route.params.todoId);
+    }
+  }, [route.params?.todoId]);
 
   const fetchData1 = async () => {
     setLoading(true);
@@ -48,6 +54,15 @@ export default function HomeSc({ navigation }) {
       console.error(error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:4000/recipes/${id}`);
+      console.log("item" + id + "DELETED");
+    } catch (error) {
+      console.error("Failed to delete item", error);
     }
   };
 
@@ -99,7 +114,11 @@ export default function HomeSc({ navigation }) {
             <FlatList
               data={filteredTodos}
               renderItem={({ item }) => (
-                <RecipeDetails itemObj={item} nav={navigation} />
+                <RecipeDetails
+                  itemObj={item}
+                  nav={navigation}
+                  handleDeleteFN={handleDelete}
+                />
               )}
 
               /* style={styles.listContainer} */
