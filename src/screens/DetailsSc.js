@@ -2,17 +2,18 @@ import React from "react";
 import { View, Text, Button } from "react-native";
 
 export default function DetailsSc({ navigation, route }) {
-  const { description, cocking_time, id } = route.params;
+  const { id, title, ingredients_steps, cocking_time } = route.params;
 
   return (
     <View>
-      <Text>Details</Text>
-      <Text>{description}</Text>
+      <Text>Recipe Information</Text>
+      <Text>{title}</Text>
+      <Text>{ingredients_steps}</Text>
       <Text>{cocking_time}</Text>
       <Button
-        title="Delete"
+        title="Delete Recipe"
         onPress={() => {
-          navigation.navigate("HOME_SC", { todoId: id });
+          navigation.navigate("HOME_SC", { todoId: id }); //SEND PARAMS BACK TO THE HOME SCREEN
         }}
       />
     </View>

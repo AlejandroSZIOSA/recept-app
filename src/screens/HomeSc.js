@@ -33,10 +33,7 @@ export default function HomeSc({ navigation, route }) {
 
   useEffect(() => {
     fetchData1();
-    //fetchData2();
     if (route.params?.todoId) {
-      // Post updated, do something with `route.params.post`
-      // For example, send the post to the server
       console.log(route.params.todoId);
       handleDelete(route.params.todoId);
     }
@@ -88,7 +85,7 @@ export default function HomeSc({ navigation, route }) {
     );
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 40 }}>Recept App</Text>
+      <Text style={{ fontSize: 40 }}>Recipes App</Text>
       <PaperProvider>
         <SafeAreaView style={styles.container}>
           <Searchbar
