@@ -66,19 +66,6 @@ export default function HomeSc({ navigation, route }) {
     }
   };
 
-  /* const fetchData2 = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch("http://localhost:4000");
-      const data = await response.json();
-      setTodos(data);
-    } catch (error) {
-      console.error("Failed to fetch data", error);
-    } finally {
-      setLoading(false);
-    }
-  }; */
-
   //When text changes
   const onChangeSearch = (query) => {
     setSearchQuery(query);
