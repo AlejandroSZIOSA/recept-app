@@ -1,29 +1,26 @@
 import { View, Text, StyleSheet, ScrollView, FlatList } from "react-native";
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import RecipeDetails from "../components/cardviews/RecipeDetails";
-
-//SEARCH BAR IMPORTS
 import { PaperProvider, Searchbar } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-
 import axios from "axios";
 
 export default function HomeSc({ navigation, route }) {
   const [searchQuery, setSearchQuery] = useState(); //SEARCH_QUERY
-  const [todos, setTodos] = useState();
-  const [filteredTodos, setFilteredTodos] = useState(); //SET_FILTERS
+  const [recipes, setRecipes] = useState();
+  const [filteredRecipes, setFilteredRecipes] = useState(); //SET_FILTERS
 
   const [loading, setLoading] = useState(false);
 
   const [newRecipe, setNewRecipe] = useState();
 
   useEffect(() => {
-    fetchTodos();
+    fetchRecipes();
     if (route.params?.todoId) {
       console.log(route.params.todoId);
       handleDelete(route.params.todoId);
-      fetchTodos();
+      fetchRecipes();
     }
     if (route.params?.newRecipe) {
       const newRecipe = route.params?.newRecipe;
@@ -32,15 +29,15 @@ export default function HomeSc({ navigation, route }) {
     }
   }, [route.params?.todoId, route.params?.newRecipe]);
 
-  const fetchTodos = async () => {
+  const fetchRecipes = async () => {
     setLoading(true);
     try {
       const response = await axios.get("http://localhost:4000");
       const data = response.data;
       //console.log(data);
       setSearchQuery("");
-      setTodos(data); //working
-      setFilteredTodos(data);
+      setRecipes(data); //working
+      setFilteredRecipes(data);
       setLoading(false);
     } catch (error) {
       console.log("Error:" + error);
@@ -65,15 +62,15 @@ export default function HomeSc({ navigation, route }) {
   //When text changes
   const onChangeSearch = (query) => {
     setSearchQuery(query);
-    filterTodos(query);
+    filterRecipes(query);
   };
 
   //Filter items
-  const filterTodos = (query) => {
-    const filtered = todos.filter((todo) =>
-      todo.title.toLowerCase().includes(query.toLowerCase())
+  const filterRecipes = (query) => {
+    const filtered = recipes.filter((recipe) =>
+      recipe.title.toLowerCase().includes(query.toLowerCase())
     );
-    setFilteredTodos(filtered);
+    setFilteredRecipes(filtered);
   };
 
   if (loading)
@@ -95,7 +92,7 @@ export default function HomeSc({ navigation, route }) {
           />
           <ScrollView>
             <FlatList
-              data={filteredTodos}
+              data={filteredRecipes}
               renderItem={({ item }) => (
                 <RecipeDetails
                   itemObj={item}
