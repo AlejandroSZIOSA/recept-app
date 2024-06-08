@@ -1,16 +1,15 @@
 import React from "react";
 import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
-import { useEffect } from "react";
 
 export default function RecipeDetails({ itemObj, nav }) {
   return (
     <View style={styles.container}>
-      <View>
+      <View style={{ marginLeft: 10 }}>
         <TouchableOpacity onPress={() => nav.navigate("DETAILS_SC", itemObj)}>
-          <Text>{itemObj.title}</Text>
+          <Text style={{ fontSize: 30 }}>{itemObj.title}</Text>
         </TouchableOpacity>
       </View>
-      <View>
+      <View style={{ marginRight: 10 }}>
         <Button title=">" onPress={() => nav.navigate("DETAILS_SC", itemObj)} />
       </View>
     </View>
@@ -21,8 +20,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     width: 350,
-    height: 50,
-    justifyContent: "space-around",
+    paddingVertical: 10,
+    justifyContent: "space-between",
     backgroundColor: "yellow",
+    borderRadius: 10,
   },
 });

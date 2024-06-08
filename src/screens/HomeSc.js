@@ -10,7 +10,6 @@ export default function HomeSc({ navigation, route }) {
   const [searchQuery, setSearchQuery] = useState(); //SEARCH_QUERY
   const [recipes, setRecipes] = useState();
   const [filteredRecipes, setFilteredRecipes] = useState(); //SET_FILTERS
-
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -90,7 +89,7 @@ export default function HomeSc({ navigation, route }) {
     );
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 40 }}>Recipes App</Text>
+      <Text style={{ fontSize: 40, paddingVertical: 10 }}>Recipes App</Text>
       <PaperProvider>
         <SafeAreaView style={styles.container}>
           <Searchbar
@@ -104,11 +103,13 @@ export default function HomeSc({ navigation, route }) {
             <FlatList
               data={filteredRecipes}
               renderItem={({ item }) => (
-                <RecipeDetails
-                  itemObj={item}
-                  nav={navigation}
-                  handleDeleteFN={handleDelete}
-                />
+                <View style={{ marginVertical: 8 }}>
+                  <RecipeDetails
+                    itemObj={item}
+                    nav={navigation}
+                    handleDeleteFN={handleDelete}
+                  />
+                </View>
               )}
 
               /* style={styles.listContainer} */
