@@ -25,9 +25,9 @@ const TEST_LIST = [
 ];
 
 export default function HomeSc({ navigation, route }) {
-  const [searchQuery, setSearchQuery] = useState(""); //SEARCH_QUERY
+  const [searchQuery, setSearchQuery] = useState(); //SEARCH_QUERY
   const [todos, setTodos] = useState();
-  const [filteredTodos, setFilteredTodos] = useState(todos); //SET_FILTERS
+  const [filteredTodos, setFilteredTodos] = useState(); //SET_FILTERS
 
   const [loading, setLoading] = useState(false);
 
@@ -36,6 +36,7 @@ export default function HomeSc({ navigation, route }) {
     if (route.params?.todoId) {
       console.log(route.params.todoId);
       handleDelete(route.params.todoId);
+      fetchData1();
     }
   }, [route.params?.todoId]);
 
@@ -45,12 +46,12 @@ export default function HomeSc({ navigation, route }) {
       const response = await axios.get("http://localhost:4000");
       data = response.data;
       console.log(data);
+      setSearchQuery("");
       setTodos(data); //working
-    } catch (error) {
-      console.info(error);
-      console.error(error);
-    } finally {
+      setFilteredTodos(data);
       setLoading(false);
+    } catch (error) {
+      console.log(error);
     }
   };
 
