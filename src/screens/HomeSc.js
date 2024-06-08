@@ -9,21 +9,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import axios from "axios";
 
-const TEST_LIST = [
-  {
-    id: 1,
-    title: "title 1",
-    description: "description_1",
-    cocking_time: "20 min",
-  },
-  {
-    id: 2,
-    title: "title 2",
-    description: "description_2",
-    cocking_time: "30 min",
-  },
-];
-
 export default function HomeSc({ navigation, route }) {
   const [searchQuery, setSearchQuery] = useState(); //SEARCH_QUERY
   const [todos, setTodos] = useState();
@@ -31,34 +16,47 @@ export default function HomeSc({ navigation, route }) {
 
   const [loading, setLoading] = useState(false);
 
+  const [newRecipe, setNewRecipe] = useState();
+
   useEffect(() => {
-    fetchData1();
+    fetchTodos();
     if (route.params?.todoId) {
       console.log(route.params.todoId);
       handleDelete(route.params.todoId);
-      fetchData1();
+      fetchTodos();
     }
-  }, [route.params?.todoId]);
+    if (route.params?.newRecipe) {
+      const newRecipe = route.params?.newRecipe;
+      setNewRecipe(newRecipe);
+      console.log("new recipe" + newRecipe);
+    }
+  }, [route.params?.todoId, route.params?.newRecipe]);
 
-  const fetchData1 = async () => {
+  const fetchTodos = async () => {
     setLoading(true);
     try {
       const response = await axios.get("http://localhost:4000");
-      data = response.data;
-      console.log(data);
+      const data = response.data;
+      //console.log(data);
       setSearchQuery("");
       setTodos(data); //working
       setFilteredTodos(data);
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.log("Error:" + error);
     }
   };
+
+  function getLatestRecipeId() {
+    let lastRecipeId = stateTodoList[stateTodoList.length - 1];
+    return lastRecipeId.id;
+  }
+  const handleAddRecipe = () => {};
 
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:4000/recipes/${id}`);
-      console.log("item" + id + "DELETED");
+      console.log("item " + id + " DELETED");
     } catch (error) {
       console.error("Failed to delete item", error);
     }
