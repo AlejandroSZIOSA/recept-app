@@ -13,8 +13,6 @@ export default function HomeSc({ navigation, route }) {
 
   const [loading, setLoading] = useState(false);
 
-  const [newRecipe, setNewRecipe] = useState();
-
   useEffect(() => {
     fetchRecipes();
     if (route.params?.todoId) {
@@ -22,9 +20,11 @@ export default function HomeSc({ navigation, route }) {
       handleDelete(route.params.todoId);
       fetchRecipes();
     }
+
     if (route.params?.newRecipe) {
       const newRecipe = route.params?.newRecipe;
-      setNewRecipe(newRecipe);
+      addNewRecipe(newRecipe);
+      fetchRecipes();
       console.log("new recipe" + newRecipe);
     }
   }, [route.params?.todoId, route.params?.newRecipe]);
@@ -44,11 +44,20 @@ export default function HomeSc({ navigation, route }) {
     }
   };
 
-  function getLatestRecipeId() {
-    let lastRecipeId = stateTodoList[stateTodoList.length - 1];
-    return lastRecipeId.id;
-  }
-  const handleAddRecipe = () => {};
+  const addNewRecipe = async (newRecipe) => {
+    let lastRecipeId = recipes[recipes.length - 1];
+    const newId = lastRecipeId.id + 1;
+    newRecipe.id = newId; //Add new id property to the object
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/recipes",
+        newRecipe
+      );
+      console.log("Success", `RECIPE CREATED: ${response.data}`);
+    } catch (error) {
+      console.error("Failed to create user", error);
+    }
+  };
 
   const handleDelete = async (id) => {
     try {
