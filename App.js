@@ -36,13 +36,24 @@ export default function App() {
         <RootStack.Screen
           name="DETAILS_SC"
           component={DetailsSc}
-          options={{
+          /* options={{
             title: "Details",
             headerTitleStyle: {
               fontSize: 24,
               fontWeight: "bold",
             },
-          }}
+          }} */
+          options={({ route }) => ({
+            title: route.params.title,
+            headerStyle: {
+              backgroundColor: "#00D382",
+            },
+            headerTintColor: "#FFFFFF",
+            headerTitleStyle: {
+              fontSize: 24,
+              fontWeight: "bold",
+            },
+          })}
         />
         <RootStack.Screen
           name="ADD_RECIPE_SC"

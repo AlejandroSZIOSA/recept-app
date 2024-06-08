@@ -98,6 +98,7 @@ export default function HomeSc({ navigation, route }) {
             onChangeText={onChangeSearch}
             value={searchQuery}
             onIconPress={() => setSearchQuery("")}
+            style={styles.searchbar}
           />
           <ScrollView>
             <FlatList
@@ -126,5 +127,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  searchbar: {
+    width: 350,
+    height: 50,
+    marginBottom: 10,
   },
 });
