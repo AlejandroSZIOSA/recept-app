@@ -1,13 +1,7 @@
-import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
+import { View, Text, TextInput, StyleSheet, ScrollView } from "react-native";
 import { useState } from "react";
 import COLORS from "../constants/colors";
+import BottomBar from "../components/BottomBar";
 
 export default function AddRecipeSc({ navigation }) {
   const [titleInput, setTitleInput] = useState("");
@@ -45,7 +39,12 @@ export default function AddRecipeSc({ navigation }) {
           <TextInput
             placeholder="Write here"
             onChangeText={(titleInput) => setTitleInput(titleInput)}
-            style={{ fontSize: 22, backgroundColor: "white" }}
+            style={{
+              fontSize: 22,
+              backgroundColor: "white",
+              borderBlockColor: "black",
+              borderWidth: 1,
+            }}
           />
         </View>
         <View>
@@ -69,7 +68,12 @@ export default function AddRecipeSc({ navigation }) {
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.text}>Cooking T :</Text>
           <TextInput
-            style={{ fontSize: 22, backgroundColor: "white" }}
+            style={{
+              fontSize: 22,
+              backgroundColor: "white",
+              borderBlockColor: "black",
+              borderWidth: 1,
+            }}
             placeholder="Write here"
             onChangeText={(cookingTimeInput) =>
               setCookingTimeInput(cookingTimeInput)
@@ -80,11 +84,7 @@ export default function AddRecipeSc({ navigation }) {
       <View style={{ alignItems: "center" }}>
         <Text style={{ fontSize: 25 }}>{errorMessage}</Text>
       </View>
-      <View style={styles.outerBtnContainer}>
-        <View style={styles.btnContainer}>
-          <Button title="add" onPress={handleCreateNewRecipe} />
-        </View>
-      </View>
+      <BottomBar title="add" onPressFN={handleCreateNewRecipe} />
     </View>
   );
 }
@@ -110,18 +110,5 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderWidth: 2,
     marginLeft: 10,
-  },
-  outerBtnContainer: {
-    width: "100%",
-    height: 70,
-    backgroundColor: COLORS.BOTTOM_BAR_BACKGROUND,
-    alignItems: "center",
-    justifyContent: "center",
-    alignContent: "center",
-    marginTop: "auto",
-  },
-  btnContainer: {
-    width: 80,
-    height: 40,
   },
 });

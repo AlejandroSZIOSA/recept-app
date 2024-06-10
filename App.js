@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import { Button } from "react-native";
+import { Button, View } from "react-native";
 import HomeSc from "./src/screens/HomeSc";
 import DetailsSc from "./src/screens/DetailsSc";
 import AddRecipeSc from "./src/screens/AddRecipeSc";
@@ -17,6 +17,7 @@ export default function App() {
           options={({ navigation }) => ({
             title: "Home",
             headerStyle: {
+              justifyContent: "space-between",
               backgroundColor: COLORS.NAV_BACKGROUND,
             },
             headerTintColor: COLORS.NAV_TEXT_COLOR,
@@ -25,10 +26,12 @@ export default function App() {
               fontWeight: "bold",
             },
             headerRight: () => (
-              <Button
-                onPress={() => navigation.navigate("ADD_RECIPE_SC")}
-                title="Add"
-              />
+              <View style={{ marginRight: 15, width: 80, height: 33 }}>
+                <Button
+                  onPress={() => navigation.navigate("ADD_RECIPE_SC")}
+                  title="Add"
+                />
+              </View>
             ),
           })}
         />

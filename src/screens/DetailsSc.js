@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, Button, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import COLORS from "../constants/colors";
+import BottomBar from "../components/BottomBar";
 
 export default function DetailsSc({ navigation, route }) {
   const { id, ingredients_steps, cocking_time } = route.params;
@@ -21,17 +22,13 @@ export default function DetailsSc({ navigation, route }) {
           Cooking time: {cocking_time}
         </Text>
       </View>
-      <View style={styles.outerBtnContainer}>
-        <View style={styles.btnContainer}>
-          <Button
-            title="Delete"
-            color="red"
-            onPress={() => {
-              navigation.navigate("HOME_SC", { todoId: id }); //SEND PARAMS BACK TO THE HOME SCREEN
-            }}
-          />
-        </View>
-      </View>
+      <BottomBar
+        title="delete"
+        color="red"
+        onPressFN={() => {
+          navigation.navigate("HOME_SC", { todoId: id }); //SEND PARAMS BACK TO THE HOME SCREEN
+        }}
+      />
     </View>
   );
 }
@@ -62,17 +59,5 @@ const styles = StyleSheet.create({
   },
   ingredientsText: {
     fontSize: 27,
-  },
-  outerBtnContainer: {
-    width: "100%",
-    height: 70,
-    backgroundColor: COLORS.BOTTOM_BAR_BACKGROUND,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: "auto",
-  },
-  btnContainer: {
-    width: 80,
-    height: 40,
   },
 });
