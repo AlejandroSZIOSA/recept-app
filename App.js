@@ -17,7 +17,6 @@ export default function App() {
           options={({ navigation }) => ({
             title: "Home",
             headerStyle: {
-              justifyContent: "space-between",
               backgroundColor: COLORS.NAV_BACKGROUND,
             },
             headerTintColor: COLORS.NAV_TEXT_COLOR,
