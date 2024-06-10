@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, Button } from "react-native";
 import COLORS from "../constants/colors";
 
-export default function BottomBar({ title, color = "blue", onPressFN }) {
+export default function BottomBar({ title, color, onPressFN }) {
   return (
     <View style={styles.outerBtnContainer}>
       <View style={styles.btnContainer}>
@@ -14,7 +14,7 @@ export default function BottomBar({ title, color = "blue", onPressFN }) {
 const styles = StyleSheet.create({
   outerBtnContainer: {
     width: "100%",
-    height: 70,
+    height: 90,
     backgroundColor: COLORS.BOTTOM_BAR_BACKGROUND,
     alignItems: "center",
     justifyContent: "center",
