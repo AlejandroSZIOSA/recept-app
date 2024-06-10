@@ -6,7 +6,7 @@ export default function RecipeDetails({ itemObj, nav }) {
     <View style={styles.container}>
       <View style={{ marginLeft: 10 }}>
         <TouchableOpacity onPress={() => nav.navigate("DETAILS_SC", itemObj)}>
-          <Text style={{ fontSize: 30 }}>{itemObj.title}</Text>
+          <Text style={{ fontSize: 27 }}>{itemObj.title}</Text>
         </TouchableOpacity>
       </View>
       <View style={{ marginRight: 10 }}>

@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, Button, StyleSheet, ScrollView } from "react-native";
+import COLORS from "../constants/colors";
 
 export default function DetailsSc({ navigation, route }) {
   const { id, ingredients_steps, cocking_time } = route.params;
@@ -24,6 +25,7 @@ export default function DetailsSc({ navigation, route }) {
         <View style={styles.btnContainer}>
           <Button
             title="Delete"
+            color="red"
             onPress={() => {
               navigation.navigate("HOME_SC", { todoId: id }); //SEND PARAMS BACK TO THE HOME SCREEN
             }}
@@ -39,12 +41,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
+    backgroundColor: COLORS.APP_BACKGROUND,
   },
   innerContainer: {
     flexDirection: "column",
     width: 380,
     height: 620,
-    backgroundColor: "yellow",
     paddingVertical: 10,
   },
   textInnerContainer: {
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
   ingredientsContainer: {
     width: 340,
     height: 500,
-    backgroundColor: "red",
+    backgroundColor: "white",
     marginHorizontal: "auto",
   },
   ingredientsText: {
@@ -63,8 +65,8 @@ const styles = StyleSheet.create({
   },
   outerBtnContainer: {
     width: "100%",
-    height: 80,
-    backgroundColor: "green",
+    height: 70,
+    backgroundColor: COLORS.BOTTOM_BAR_BACKGROUND,
     alignItems: "center",
     justifyContent: "center",
     marginTop: "auto",

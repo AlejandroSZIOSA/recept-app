@@ -5,6 +5,7 @@ import RecipeDetails from "../components/cardviews/RecipeDetails";
 import { PaperProvider, Searchbar } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios";
+import COLORS from "../constants/colors";
 
 export default function HomeSc({ navigation, route }) {
   const [searchQuery, setSearchQuery] = useState(); //SEARCH_QUERY
@@ -89,7 +90,7 @@ export default function HomeSc({ navigation, route }) {
     );
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 40, paddingVertical: 10 }}>Recipes App</Text>
+      <Text style={{ fontSize: 40, paddingVertical: 10 }}>Recipes</Text>
       <PaperProvider>
         <SafeAreaView style={styles.container}>
           <Searchbar
@@ -125,7 +126,7 @@ export default function HomeSc({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: COLORS.APP_BACKGROUND,
     alignItems: "center",
     justifyContent: "center",
   },

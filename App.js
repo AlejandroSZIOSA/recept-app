@@ -4,7 +4,7 @@ import { Button } from "react-native";
 import HomeSc from "./src/screens/HomeSc";
 import DetailsSc from "./src/screens/DetailsSc";
 import AddRecipeSc from "./src/screens/AddRecipeSc";
-
+import COLORS from "./src/constants/colors";
 const RootStack = createNativeStackNavigator();
 
 export default function App() {
@@ -17,9 +17,9 @@ export default function App() {
           options={({ navigation }) => ({
             title: "Home",
             headerStyle: {
-              backgroundColor: "#00D382",
+              backgroundColor: COLORS.NAV_BACKGROUND,
             },
-            headerTintColor: "#FFFFFF",
+            headerTintColor: COLORS.NAV_TEXT_COLOR,
             headerTitleStyle: {
               fontSize: 24,
               fontWeight: "bold",
@@ -36,19 +36,12 @@ export default function App() {
         <RootStack.Screen
           name="DETAILS_SC"
           component={DetailsSc}
-          /* options={{
-            title: "Details",
-            headerTitleStyle: {
-              fontSize: 24,
-              fontWeight: "bold",
-            },
-          }} */
           options={({ route }) => ({
             title: route.params.title,
             headerStyle: {
-              backgroundColor: "#00D382",
+              backgroundColor: COLORS.NAV_BACKGROUND,
             },
-            headerTintColor: "#FFFFFF",
+            headerTintColor: COLORS.NAV_TEXT_COLOR,
             headerTitleStyle: {
               fontSize: 24,
               fontWeight: "bold",
@@ -59,7 +52,11 @@ export default function App() {
           name="ADD_RECIPE_SC"
           component={AddRecipeSc}
           options={{
-            title: "ADD RECIPE",
+            title: "Add Recipe",
+            headerStyle: {
+              backgroundColor: COLORS.NAV_BACKGROUND,
+            },
+            headerTintColor: COLORS.NAV_TEXT_COLOR,
             headerTitleStyle: {
               fontSize: 24,
               fontWeight: "bold",
