@@ -20,8 +20,12 @@ export default function HomeSc({ navigation, route }) {
   const [filteredRecipes, setFilteredRecipes] = useState(); //SET_FILTERS
   const [loading, setLoading] = useState(false);
 
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const [isByTitleEnabled, setIsByTitleEnabled] = useState(false);
+  const [isByCookingTimeEnabled, setIsByCookingTimeEnabled] = useState(false);
+  const toggleSwitch1 = () =>
+    setIsByTitleEnabled((previousState) => !previousState);
+  const toggleSwitch2 = () =>
+    setIsByCookingTimeEnabled((previousState) => !previousState);
 
   useEffect(() => {
     fetchRecipes();
@@ -121,10 +125,10 @@ export default function HomeSc({ navigation, route }) {
               <Text style={styles.switchText}>By title</Text>
               <Switch
                 trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+                thumbColor={isByTitleEnabled ? "#f5dd4b" : "#f4f3f4"}
                 ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={isEnabled}
+                onValueChange={toggleSwitch1}
+                value={isByTitleEnabled}
                 style={{ marginLeft: 10 }}
               />
             </View>
@@ -132,10 +136,10 @@ export default function HomeSc({ navigation, route }) {
               <Text style={styles.switchText}>By Cooking T</Text>
               <Switch
                 trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+                thumbColor={isByCookingTimeEnabled ? "#f5dd4b" : "#f4f3f4"}
                 ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={isEnabled}
+                onValueChange={toggleSwitch2}
+                value={isByCookingTimeEnabled}
                 style={{ marginLeft: 10 }}
               />
             </View>
@@ -183,5 +187,9 @@ const styles = StyleSheet.create({
   },
   switchText: {
     fontSize: 18,
+  },
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: COLORS.APP_BACKGROUND,
   },
 });
