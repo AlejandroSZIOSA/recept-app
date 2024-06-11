@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, ScrollView, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  FlatList,
+  Switch,
+} from "react-native";
 import { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import RecipeDetails from "../components/cardviews/RecipeDetails";
@@ -12,6 +19,9 @@ export default function HomeSc({ navigation, route }) {
   const [recipes, setRecipes] = useState();
   const [filteredRecipes, setFilteredRecipes] = useState(); //SET_FILTERS
   const [loading, setLoading] = useState(false);
+
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   useEffect(() => {
     fetchRecipes();
@@ -100,6 +110,36 @@ export default function HomeSc({ navigation, route }) {
             onIconPress={() => setSearchQuery("")}
             style={styles.searchbar}
           />
+          <View
+            style={{
+              flexDirection: "row",
+              width: "100%",
+              height: 50,
+            }}
+          >
+            <View style={styles.switchContainer}>
+              <Text style={styles.switchText}>By title</Text>
+              <Switch
+                trackColor={{ false: "#767577", true: "#81b0ff" }}
+                thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+                style={{ marginLeft: 10 }}
+              />
+            </View>
+            <View style={styles.switchContainer}>
+              <Text style={styles.switchText}>By Cooking T</Text>
+              <Switch
+                trackColor={{ false: "#767577", true: "#81b0ff" }}
+                thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+                style={{ marginLeft: 10 }}
+              />
+            </View>
+          </View>
           <ScrollView>
             <FlatList
               data={filteredRecipes}
@@ -134,5 +174,14 @@ const styles = StyleSheet.create({
     width: 350,
     height: 50,
     marginBottom: 10,
+  },
+  switchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingLeft: 30,
+  },
+  switchText: {
+    fontSize: 18,
   },
 });
