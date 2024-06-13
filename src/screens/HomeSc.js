@@ -20,12 +20,18 @@ export default function HomeSc({ navigation, route }) {
   const [filteredRecipes, setFilteredRecipes] = useState(); //SET_FILTERS
   const [loading, setLoading] = useState(false);
 
-  const [isByTitleEnabled, setIsByTitleEnabled] = useState(false);
+  //Switches
+  const [isByTitleEnabled, setIsByTitleEnabled] = useState(true);
   const [isByCookingTimeEnabled, setIsByCookingTimeEnabled] = useState(false);
-  const toggleSwitch1 = () =>
+
+  const toggleSwitchByTitle = () => {
     setIsByTitleEnabled((previousState) => !previousState);
-  const toggleSwitch2 = () =>
+    setIsByCookingTimeEnabled(false);
+  };
+  const toggleSwitchByCt = () => {
     setIsByCookingTimeEnabled((previousState) => !previousState);
+    setIsByTitleEnabled(false);
+  };
 
   useEffect(() => {
     fetchRecipes();
@@ -90,10 +96,18 @@ export default function HomeSc({ navigation, route }) {
 
   //Filter items
   const filterRecipes = (query) => {
-    const filtered = recipes.filter((recipe) =>
-      recipe.title.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilteredRecipes(filtered);
+    if (isByTitleEnabled) {
+      const filtered = recipes.filter((recipe) =>
+        recipe.title.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredRecipes(filtered);
+    }
+    if (isByCookingTimeEnabled) {
+      const filtered = recipes.filter((recipe) =>
+        recipe.cocking_time.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredRecipes(filtered);
+    }
   };
 
   if (loading)
@@ -127,7 +141,7 @@ export default function HomeSc({ navigation, route }) {
                 trackColor={{ false: "#767577", true: "#81b0ff" }}
                 thumbColor={isByTitleEnabled ? "#f5dd4b" : "#f4f3f4"}
                 ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch1}
+                onValueChange={toggleSwitchByTitle}
                 value={isByTitleEnabled}
                 style={{ marginLeft: 10 }}
               />
@@ -138,7 +152,7 @@ export default function HomeSc({ navigation, route }) {
                 trackColor={{ false: "#767577", true: "#81b0ff" }}
                 thumbColor={isByCookingTimeEnabled ? "#f5dd4b" : "#f4f3f4"}
                 ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch2}
+                onValueChange={toggleSwitchByCt}
                 value={isByCookingTimeEnabled}
                 style={{ marginLeft: 10 }}
               />
