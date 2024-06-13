@@ -26,11 +26,11 @@ export default function HomeSc({ navigation, route }) {
 
   const toggleSwitchByTitle = () => {
     setIsByTitleEnabled((previousState) => !previousState);
-    setIsByCookingTimeEnabled(false);
+    if (isByTitleEnabled) setIsByCookingTimeEnabled(false);
   };
   const toggleSwitchByCt = () => {
     setIsByCookingTimeEnabled((previousState) => !previousState);
-    setIsByTitleEnabled(false);
+    if (isByCookingTimeEnabled) setIsByTitleEnabled(false);
   };
 
   useEffect(() => {
@@ -39,12 +39,9 @@ export default function HomeSc({ navigation, route }) {
       console.log(route.params.todoId);
       handleDelete(route.params.todoId);
     }
-
     if (route.params?.newRecipe) {
       const newRecipe = route.params?.newRecipe;
       addNewRecipe(newRecipe);
-
-      /* console.log("new recipe" + newRecipe); */
     }
   }, [route.params?.todoId, route.params?.newRecipe]);
 
