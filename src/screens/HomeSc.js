@@ -38,14 +38,13 @@ export default function HomeSc({ navigation, route }) {
     if (route.params?.todoId) {
       console.log(route.params.todoId);
       handleDelete(route.params.todoId);
-      fetchRecipes();
     }
 
     if (route.params?.newRecipe) {
       const newRecipe = route.params?.newRecipe;
       addNewRecipe(newRecipe);
-      fetchRecipes();
-      console.log("new recipe" + newRecipe);
+
+      /* console.log("new recipe" + newRecipe); */
     }
   }, [route.params?.todoId, route.params?.newRecipe]);
 
@@ -65,14 +64,17 @@ export default function HomeSc({ navigation, route }) {
   };
 
   const addNewRecipe = async (newRecipe) => {
-    let lastRecipeId = recipes[recipes.length - 1];
-    const newId = lastRecipeId.id + 1;
+    let lastRecipe = recipes[recipes.length - 1];
+    console.log(lastRecipe);
+    let newId = lastRecipe.id + 1;
+
     newRecipe.id = newId; //Add new id property to the object
     try {
       const response = await axios.post(
         "http://localhost:4000/recipes",
         newRecipe
       );
+      fetchRecipes(); //Fix problem
       console.log("Success", `RECIPE CREATED: ${response.data}`);
     } catch (error) {
       console.error("Failed to create user", error);
@@ -83,6 +85,7 @@ export default function HomeSc({ navigation, route }) {
     try {
       await axios.delete(`http://localhost:4000/recipes/${id}`);
       console.log("item " + id + " DELETED");
+      fetchRecipes(); //Fix problem
     } catch (error) {
       console.error("Failed to delete item", error);
     }
