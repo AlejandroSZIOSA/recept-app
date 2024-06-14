@@ -1,0 +1,2 @@
+Navigation :Passing params to a previous screen
+https://reactnavigation.org/docs/params
