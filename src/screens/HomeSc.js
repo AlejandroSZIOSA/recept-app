@@ -62,10 +62,11 @@ export default function HomeSc({ navigation, route }) {
 
   const addNewRecipe = async (newRecipe) => {
     let lastRecipe = recipes[recipes.length - 1];
-    console.log(lastRecipe);
-    let newId = lastRecipe.id + 1;
-
-    newRecipe.id = newId; //Add new id property to the object
+    if (lastRecipe !== undefined) {
+      console.log(lastRecipe);
+      let newId = lastRecipe.id + 1;
+      newRecipe.id = newId; //Add new id property to the object
+    } else newRecipe.id = 1;
     try {
       const response = await axios.post(
         "http://localhost:4000/recipes",
