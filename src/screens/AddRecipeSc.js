@@ -40,7 +40,7 @@ export default function AddRecipeSc({ navigation }) {
             placeholder="Write here"
             onChangeText={(titleInput) => setTitleInput(titleInput)}
             style={{
-              fontSize: 22,
+              fontSize: 24,
               backgroundColor: "white",
               borderBlockColor: "black",
               borderWidth: 1,
@@ -69,7 +69,7 @@ export default function AddRecipeSc({ navigation }) {
           <Text style={styles.text}>Cooking T :</Text>
           <TextInput
             style={{
-              fontSize: 22,
+              fontSize: 24,
               backgroundColor: "white",
               borderBlockColor: "black",
               borderWidth: 1,
@@ -100,7 +100,6 @@ const styles = StyleSheet.create({
     width: 380,
     height: 670,
     justifyContent: "space-around",
-    /* backgroundColor: "yellow", */
   },
   text: { fontSize: 27 },
   ingredientsContainer: {

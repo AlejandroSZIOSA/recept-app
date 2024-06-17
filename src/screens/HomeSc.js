@@ -109,8 +109,10 @@ export default function HomeSc({ navigation, route }) {
 
   if (loading)
     return (
-      <View>
-        <Text>Loading Todos................</Text>
+      <View style={styles.loadingRecipeListContainer}>
+        <Text style={{ fontSize: 40, textAlign: "center" }}>
+          Loading Recipes ...............................
+        </Text>
       </View>
     );
   return (
@@ -189,8 +191,11 @@ const styles = StyleSheet.create({
   switchText: {
     fontSize: 18,
   },
-  loadingContainer: {
+  loadingRecipeListContainer: {
     flex: 1,
-    backgroundColor: COLORS.APP_BACKGROUND,
+    flexDirection: "column",
+    alignSelf: "center",
+    justifyContent: "center",
+    backgroundColor: "#FFB379",
   },
 });
