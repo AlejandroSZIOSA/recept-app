@@ -12,7 +12,7 @@ export default function DetailsSc({ navigation, route }) {
         Recipe Information
       </Text>
       <View style={styles.innerContainer}>
-        <Text style={styles.textInnerContainer}>Ingredients + steps</Text>
+        <Text style={styles.textInnerContainer}>Ingredients / steps</Text>
         <ScrollView>
           <View style={styles.ingredientsContainer}>
             <Text style={styles.ingredientsText}>{ingredients_steps}</Text>

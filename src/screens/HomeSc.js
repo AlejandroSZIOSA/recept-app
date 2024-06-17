@@ -21,22 +21,18 @@ export default function HomeSc({ navigation, route }) {
   const [loading, setLoading] = useState(false);
 
   //Switches
+
   const [isByTitleEnabled, setIsByTitleEnabled] = useState(true);
   const [isByCookingTimeEnabled, setIsByCookingTimeEnabled] = useState(false);
 
-  const toggleSwitchByTitle = () => {
-    setIsByTitleEnabled((previousState) => !previousState);
-    if (isByTitleEnabled) setIsByCookingTimeEnabled(false);
-  };
   const toggleSwitchByCt = () => {
     setIsByCookingTimeEnabled((previousState) => !previousState);
-    if (isByCookingTimeEnabled) setIsByTitleEnabled(false);
   };
 
   useEffect(() => {
     fetchRecipes();
     if (route.params?.todoId) {
-      console.log(route.params.todoId);
+      //console.log(route.params.todoId);
       handleDelete(route.params.todoId);
     }
     if (route.params?.newRecipe) {
@@ -82,7 +78,7 @@ export default function HomeSc({ navigation, route }) {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:4000/recipes/${id}`);
-      console.log("item " + id + " DELETED");
+      console.log("item ID" + id + " DELETED");
       fetchRecipes(); //Fix problem
     } catch (error) {
       console.error("Failed to delete item", error);
@@ -134,23 +130,13 @@ export default function HomeSc({ navigation, route }) {
               flexDirection: "row",
               width: "100%",
               height: 50,
+              justifyContent: "center",
             }}
           >
             <View style={styles.switchContainer}>
-              <Text style={styles.switchText}>By title</Text>
-              <Switch
-                trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={isByTitleEnabled ? "#f5dd4b" : "#f4f3f4"}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitchByTitle}
-                value={isByTitleEnabled}
-                style={{ marginLeft: 10 }}
-              />
-            </View>
-            <View style={styles.switchContainer}>
               <Text style={styles.switchText}>By Cooking T</Text>
               <Switch
-                trackColor={{ false: "#767577", true: "#81b0ff" }}
+                trackColor={{ false: "#BCBCBC", true: "#81b0ff" }}
                 thumbColor={isByCookingTimeEnabled ? "#f5dd4b" : "#f4f3f4"}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={toggleSwitchByCt}
