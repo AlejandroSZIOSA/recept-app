@@ -55,7 +55,7 @@ export default function AddRecipeSc({ navigation }) {
                 editable
                 multiline
                 numberOfLines={20}
-                style={{ fontSize: 22 }}
+                style={styles.text}
                 maxLength={300}
                 placeholder="Write here"
                 onChangeText={(ingredientsStepsInput) =>

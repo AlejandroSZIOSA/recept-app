@@ -134,7 +134,7 @@ export default function HomeSc({ navigation, route }) {
             }}
           >
             <View style={styles.switchContainer}>
-              <Text style={styles.switchText}>By Cooking T</Text>
+              <Text style={styles.switchText}>By Cooking Time / Min</Text>
               <Switch
                 trackColor={{ false: "#BCBCBC", true: "#81b0ff" }}
                 thumbColor={isByCookingTimeEnabled ? "#f5dd4b" : "#f4f3f4"}
